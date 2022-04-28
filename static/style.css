@@ -36,3 +36,9 @@ body {
   gap: 12px;
   font-size: 22px;
 }
+
+.form-login {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}

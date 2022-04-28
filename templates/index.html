@@ -5,7 +5,6 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Todo App</title>
-
   <link rel="stylesheet" href="static/style.css">
   <link rel="stylesheet" href="static/neumorphism-ui.css">
 </head>
@@ -28,18 +27,22 @@
           {% if item.complete == True %}
             <s>{{ item.title }}</s>
           {% else %}
-            <form action="/update/{{ loop.index0 }}" method="POST">
-              <input  class="sul-text-field" name="title" value="{{ item.title }}">
+            <form  
+              action="/update/{{item.id}}" method="POST">
+              <input 
+                class="sul-text-field"
+                name="title" 
+                value="{{item.title}}"
+              >
               <button class="sul-btn" type="submit">Editar</button>
             </form>
           {% endif %}
-
-          {{ item.category }}
-          <a href="/complete/{{loop.index0}}">
+          {{item.category}}
+          <a href="/complete/{{item.id}}">
             ✅
           </a>
   
-          <a href="/delete/{{loop.index0}}">
+          <a href="/delete/{{item.id}}">
             ❌
           </a>
         </li>
