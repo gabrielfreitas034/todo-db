@@ -1,12 +1,12 @@
-<!DOCTYPE html>
 <html lang="en">
 <head>
   <meta charset="UTF-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Todo App</title>
-  <link rel="stylesheet" href="static/style.css">
-  <link rel="stylesheet" href="static/neumorphism-ui.css">
+
+  <link rel="stylesheet" href="/static/style.css">
+  <link rel="stylesheet" href="/static/neumorphism-ui.css">
 </head>
 <body class="dark-mode">
   <div class="sul-box-raised-2 container">
@@ -27,27 +27,58 @@
           {% if item.complete == True %}
             <s>{{ item.title }}</s>
           {% else %}
-            <form  
-              action="/update/{{item.id}}" method="POST">
+            <form 
+              action="/update/{{ item.id }}"
+              method="POST"
+            >
               <input 
                 class="sul-text-field"
-                name="title" 
+                name="title"
                 value="{{item.title}}"
               >
-              <button class="sul-btn" type="submit">Editar</button>
+              <button class="sul-btn" type="submit">
+                Editar
+              </button>
             </form>
           {% endif %}
-          {{item.category}}
-          <a href="/complete/{{item.id}}">
+
+          {{ item.category }}
+          <a href="/complete/{{ item.id }}">
             ✅
           </a>
-  
-          <a href="/delete/{{item.id}}">
+
+          <a href="/delete/{{ item.id }}">
             ❌
           </a>
         </li>
       {% endfor %}
     </ul>
   </div>
+
+  {% with messages = get_flashed_messages(with_categories=True) %}
+    {% if messages %}
+      <div class="messages">
+        {% for type, text in messages %}
+          <div class="{{ type }}">
+            <span>{{ text }}</span> 
+          <button class="close" onclick="closeMsg();">
+            x
+          </button>
+          </div>
+        {% endfor %}
+      </div>
+    {% endif %}
+  {% endwith %}
+
+  <script>
+    function closeMsg() {
+      this.parentsElement.style.display = 'none';
+    }
+    
+    setTimeout(function() {
+      const msgElement = document.querySelector('.messages');
+      msgElement.style.display = 'none';
+    }, 5000); 
+  </script>
 </body>
 </html>

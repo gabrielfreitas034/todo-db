@@ -5,7 +5,7 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Todo App</title>
-  
+
   <link rel="stylesheet" href="static/style.css">
   <link rel="stylesheet" href="static/neumorphism-ui.css">
 </head>
@@ -13,12 +13,23 @@
   <div class="sul-box-raised-2 container">
     <h1>Cadastro</h1>
     <form class="form-login" action="/signup" method="POST">
-      <input class="sul-text-field" type="name" placeholder="Nome">
+      <input class="sul-text-field" name="name" placeholder="Nome">
       <input class="sul-text-field" type="email" name="email" placeholder="E-mail">
       <input class="sul-text-field" type="password" name="password" placeholder="Senha">
-      <button class="sul-btn" type="submit" >Enviar</button>
+      <button type="submit" class="sul-btn">Enviar</button>
     </form>
     <a href="/login">Login</a>
   </div>
+
+  {% with messages = get_flashed_messages(with_categories=True) %}
+    {% if messages %}
+      <div class="messages">
+        {% for type, text in messages %}
+          <span class="{{ type }}"> {{ text }} </span>
+        {% endfor %}
+      </div>
+    {% endif %}
+  {% endwith %}
+  
 </body>
 </html>
